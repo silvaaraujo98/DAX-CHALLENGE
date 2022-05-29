@@ -3,3 +3,10 @@ R:
 	Products below $ 20 = CALCULATE(COUNT(Products[ProductID]),
                     			Products[Discontinued]=False,
                     			Products[UnitPrice]<20)
+
+2. Which is the most expensive product
+R:
+	Most Expensive Product = CALCULATE(
+                                    SELECTEDVALUE(Products[ProductName]),
+                                    FILTER(Products,
+                                    Products[UnitPrice]=MAX(Products[UnitPrice])))
