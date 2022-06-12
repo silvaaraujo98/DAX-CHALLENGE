@@ -4,9 +4,30 @@ R:
                     			Products[Discontinued]=False,
                     			Products[UnitPrice]<20)
 
-2. Which is the most expensive product
+2. Which is the most expensive product?
 R:
 	Most Expensive Product = CALCULATE(
                                     SELECTEDVALUE(Products[ProductName]),
                                     FILTER(Products,
                                     Products[UnitPrice]=MAX(Products[UnitPrice])))
+
+3. How Many products cost between 15 and 25 dollars?
+R:
+	Count of Products cost between $15 and $25 = CALCULATE(COUNT(Products[ProductID]),
+                                            FILTER(Products,
+                                            Products[UnitPrice]<=25 && 
+                                            Products[UnitPrice]>=15))
+
+4. What is the average of unit prices of products?
+R:
+	Average Unit Price of Products = AVERAGE(Products[UnitPrice])
+
+5. How many products is above average unit price?
+R:
+	Quantity of Produtcs above average price = 
+		VAR AVERAGE_ALL = AVERAGEX(ALL(Products),Products[UnitPrice])
+		VAR FILTERED_TABLE = FILTER(Products,Products[UnitPrice] > AVERAGE_ALL)
+		RETURN CALCULATE(COUNT(Products[ProductID]),FILTERED_TABLE)
+
+
+
